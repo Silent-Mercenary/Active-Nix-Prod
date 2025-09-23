@@ -13,7 +13,6 @@
       ./fish.nix
       ./jellyfin.nix
       ./nix.nix
-      ./nvidia.nix
       ./mounts.nix
       ./piracy-suite.nix
       ./pkgs.nix
