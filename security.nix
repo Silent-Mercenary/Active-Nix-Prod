@@ -15,8 +15,8 @@
   };  
 
   environment.etc."no-ip2.conf".text = ''
-	email=qfk7swa
-	password=SnQQfDjYxcGs
+	email=###########
+	password=##########
 	update_interval=30
   '';
   systemd.services.noip ={
