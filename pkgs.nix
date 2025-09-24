@@ -7,6 +7,6 @@
   environment.systemPackages = with pkgs; [
   git curl wget micro fish zellij btop
   micro zoxide fwupd noip caddy tailscale
-  jq openvpn
+  jq openvpn nil
   ];
 }
