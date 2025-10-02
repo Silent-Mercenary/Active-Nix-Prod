@@ -1,6 +1,22 @@
 {pkgs, ...}:
 # Security nix is responsible for SSH and fail2ban, firewalls configs are spread all around due to how services 
 {
+
+ 
+  security.doas ={ 
+    enable = true;
+  	extraRules = [
+    {
+      groups = [ "wheel" ];
+      keepEnv = true;
+      persist = true;
+      noLog = true;
+    }
+  ];
+ };
+
+
+
   services.openssh = {
     enable = true;  # enables ssh
     ports = [ 22 ]; # default port for ssh, scp, *remember to cuck ssh to tailscale on the firewall page*

@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
 
+	  ./amd.nix
       ./caddy.nix
       ./fish.nix
       ./jellyfin.nix
@@ -42,7 +43,7 @@
   users.users.admin = {
     isNormalUser = true;
     description = "admin";
-    extraGroups = [ "networkmanager" "wheel" "docker" "www-data" "jellyfin" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "www-data" "jellyfin" "libvirtd" ];
     shell = pkgs.fish;
   };
   users.groups.www-data = {

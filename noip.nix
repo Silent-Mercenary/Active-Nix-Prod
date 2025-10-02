@@ -1,3 +1,5 @@
+{config, pkgs, ...}:
+{
 systemd.services.noip = {
   enable = true;
   description = "noip DUC for NixOS";
@@ -11,3 +13,4 @@ systemd.services.noip = {
     EnvironmentFile = "/etc/nixos/secrets/no-ip.env";
   };
 };
+}

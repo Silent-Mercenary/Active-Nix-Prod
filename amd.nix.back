@@ -9,6 +9,7 @@
     systemPackages = with pkgs; [
       libva
       mesa
+      lact
     ];
    };
 }
