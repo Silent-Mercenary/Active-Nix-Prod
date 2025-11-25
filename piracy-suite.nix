@@ -19,8 +19,8 @@ in
     group = arrGroup;
     extraGroups = [ "jellyfin" ];
     createHome = false;
-    home = "/nonexistent";
-    shell = "${pkgs.shadow}/bin/nologin";
+    home = "/arr";
+    shell = "${pkgs.fish}/bin/fish";
   };
 
   users.groups.arr = {};

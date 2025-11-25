@@ -77,6 +77,19 @@
 
   networking.firewall.allowedTCPPorts = [ 22 ];
 
+  #QBittorrent firewall rules for bullshittery
+  networking.firewall = {
+  enable = true;
+  extraCommands = ''
+    # NAT traffic from VPN namespace to internet
+    iptables -t nat -A POSTROUTING -s 10.200.200.0/30 -o wlp65s0 -j MASQUERADE
+
+    # Forward WebUI port from LAN to namespace
+    iptables -t nat -A PREROUTING -i wlp65s0 -p tcp --dport 9091 -j DNAT --to-destination 10.200.200.2:9091
+    iptables -t nat -A POSTROUTING -o wlp65s0 -p tcp -d 10.200.200.2 --dport 9091 -j MASQUERADE
+  '';
+};
+
   environment.etc = {
     "fail2ban/filter.d/nextcloud.conf".text = ''
       [Definition]

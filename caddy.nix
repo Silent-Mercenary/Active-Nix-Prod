@@ -54,8 +54,8 @@
         redir /qbt /qbt/
         handle_path /qbt/* {
         
-          reverse_proxy localhost:9091 {
-            header_up Host localhost:9091
+          reverse_proxy 10.200.200.2:9091 {
+            header_up Host 10.200.200.2:9091
             header_up -Origin
             header_up -Referer
           }
