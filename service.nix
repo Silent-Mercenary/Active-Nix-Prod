@@ -2,19 +2,15 @@
 {
 	powerManagement = {
         enable = true;
-		powertop.enable = true;	# --> enables powertop autotuning
+				powertop.enable = true;	# --> enables powertop autotuning
 	};
-
-	services.tailscale = { 
-  	enable = true; # --> tailscale daemon 
-		permitCertUid = "239";
-	};
-
 	services.thermald.enable = true;
-}
 
-# Docs
-# powertop --------> https://nixos.wiki/wiki/Laptop#Powertop
-# powermanagement -> https://nixos.wiki/wiki/Power_Management
-# jellyfin --------> https://wiki.nixos.org/wiki/Jellyfin
-# tailscale -------> https://nixos.wiki/wiki/Tailscale
+	services.cron = {
+	  enable = true;
+	  systemCronJobs = [
+	    # run as root every minute
+	    "*/4 * * * * root /bin/sh /var/cronapache.sh  >> /var/log/crontab.apache 2>&1"
+	  ];
+	};
+}

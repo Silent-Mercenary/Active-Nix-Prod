@@ -7,8 +7,6 @@
     user = "jellyfin";
   };
 
-
-
   environment.systemPackages = [
     pkgs.jellyfin
     pkgs.jellyfin-web

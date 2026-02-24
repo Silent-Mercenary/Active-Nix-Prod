@@ -1,30 +1,51 @@
 { ... }:
 
-
-
 {
+
+	services.tailscale = { 
+  	enable = true; # --> tailscale daemon 
+		permitCertUid = "239"; # ---> permit caddy GID to fetch tailscale cert
+	};
+
   services.caddy = {
     enable = true;
+    /*
+        virtualHosts."jellyfin.nasbox.ca".extraConfig = ''
+          encode gzip
 
-# External domain -----> Serves only Jellyfin/Nextcloud
+          # Serve ACME challenges over HTTP
+          handle /.well-known/acme-challenge/* {
+              root * /var/lib/caddy/.local/share/caddy/acme
+              file_server
+          }
 
+          # Everything else proxies to Jellyfin
+          reverse_proxy /* localhost:8096
+        '';
+    */
     virtualHosts."dawson.sytes.net" = {
       extraConfig = ''
-        encode gzip
+                encode gzip
 
-        reverse_proxy /jellyfin* localhost:8096    
-		    reverse_proxy            localhost:8081
+                reverse_proxy /jellyfin* localhost:8096    
+        		    reverse_proxy            localhost:8081
       '';
     };
-    
-    # Internal Tailscale domain, May require certs -------> 
+     virtualHosts."nc.nasbox.ca".extraConfig = ''
+      reverse_proxy 127.0.0.1:8081
+    '';
+     virtualHosts."jf.nasbox.ca".extraConfig = ''
+      reverse_proxy 127.0.0.1:8096
+    '';
 
-    virtualHosts."server-nix.tailfe1dd.ts.net" ={
+    # Internal Tailscale domain, May require certs ------->
+
+    virtualHosts."server-nix.tailfe1dd.ts.net" = {
       extraConfig = ''
         encode gzip
         redir /portainer /portainer/
         handle_path /portainer/* {
-        
+
           reverse_proxy localhost:9000 {
             header_up Host localhost:9000
             header_up -Origin
@@ -42,8 +63,8 @@
         }
         # basic password, cause why not?
         handle_path /editor/* {
-        
-        
+
+
           reverse_proxy localhost:8443 {
             header_up Host localhost:8443
             header_up -Origin
@@ -53,7 +74,7 @@
 
         redir /qbt /qbt/
         handle_path /qbt/* {
-        
+
           reverse_proxy 10.200.200.2:9091 {
             header_up Host 10.200.200.2:9091
             header_up -Origin
@@ -63,6 +84,9 @@
         reverse_proxy 172.19.0.2:5005
       '';
     };
-   };
-networking.firewall.allowedTCPPorts = [ 80 443 ];  
+  };
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 }

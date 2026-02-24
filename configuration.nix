@@ -8,56 +8,35 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./cron.nix
-	  ./amd.nix
+      ./ddclient.nix
+      ./amd.nix
       ./caddy.nix
+      ./docker.nix
       ./fish.nix
       ./jellyfin.nix
       ./nix.nix
-      ./mounts.nix
+      ./networking.nix
       ./piracy-suite.nix
       ./pkgs.nix
       ./qbittorrent.nix
       ./security.nix
       ./service.nix
-      ./virtualization.nix
-	  ./libvirt.nix      
+      ./user.nix
 
-      
+      ## To do: add git init hook
     ];
-
-  # Todo ---> Fucking smt, idk im as confused as you are rn, P.S aiden wrote this
 
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "dell-server"; # Define your hostname.
-  networking.networkmanager.enable = true;
-
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+  
   time.timeZone = "America/Toronto";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # User Account Management
-  users.users.admin = {
-    isNormalUser = true;
-    description = "admin";
-    extraGroups = [ "networkmanager" "wheel" "docker" "www-data" "jellyfin" "libvirtd" ];
-    shell = pkgs.fish;
-  };
-  users.groups.www-data = {
-    gid = 33;
-  };
-  users.users.www-data = {
-    isSystemUser = true;
-    description = "www-data";
-    group = "www-data";
-    uid = 33;
-    extraGroups = [ "networkmanager" ];
-    shell = "${pkgs.shadow}/bin/nologin";
-  };
+
 
   system.stateVersion = "25.05"; # this is the version that nixos thinks its part of, or in other words, change this to 25.11 if you wanna go with unstable
-
 }

@@ -5,6 +5,10 @@
 # Mount points/Filesystems #
 ############################
 
+
+# Note to self: Add Mount options and create btrfs drive ASAP with a subvolume for incus
+# PS = fucking god help us all when one of these volumes uuids go missing
+
 {
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/c0f4dafc-5ba9-4a5f-9de2-20496daa3bec";
