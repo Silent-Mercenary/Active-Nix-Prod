@@ -6,6 +6,10 @@
     openFirewall = true;
     user = "jellyfin";
   };
+  users.users.jellyfin.extraGroups = [ "video" "render" ];
+	systemd.services.jellyfin.environment = {
+  		LIBVA_DRIVER_NAME = "radeonsi";
+	};
 
   environment.systemPackages = [
     pkgs.jellyfin

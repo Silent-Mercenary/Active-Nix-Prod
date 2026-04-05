@@ -7,8 +7,11 @@
   };
   environment = {
     systemPackages = with pkgs; [
-      libva
-      mesa
+      	libva
+      	mesa
+	libvdpau-va-gl
+	libva-vdpau-driver
+	libva-utils
     ];
    };
 }

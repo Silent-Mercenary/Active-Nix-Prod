@@ -1,12 +1,14 @@
-{pkgs, nix, ...}:
+{ pkgs, nix, ... }:
 
 {
-    # Rip the-powerEDGING-machine
-  networking ={
+  # Rip the-powerEDGING-machine
+  networking = {
     hostName = "dell-server"; # Define your hostname.
-    networkmanager ={
+    useDHCP = false;
+    networkmanager = {
       enable = true;
-      wifi.backend = "wpa_supplicant";
+      wifi.backend = "iwd";
     };
   };
+  services.dhcpcd.enable = false;
 }
