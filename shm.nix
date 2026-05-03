@@ -1,9 +1,6 @@
 {
-  config,
-  nix,
-  boot,
+  ...
 }:
-
 {
   boot.specialFileSystems."/dev/shm" = {
     fsType = "tmpfs";

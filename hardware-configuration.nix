@@ -18,10 +18,10 @@
       fsType = "ext4";
     };
 
-  fileSystems."/mnt" =
-    { device = "/dev/disk/by-uuid/4dd43a15-cfe2-4d6f-889e-aeb333cb8b04";
-      fsType = "ext4";
-    };
+#  fileSystems."/mnt" =
+#    { device = "/dev/disk/by-uuid/4dd43a15-cfe2-4d6f-889e-aeb333cb8b04";
+#      fsType = "ext4";
+#    };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/F303-7D87";

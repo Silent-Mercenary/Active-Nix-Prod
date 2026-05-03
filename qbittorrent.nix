@@ -113,7 +113,7 @@ systemd.services.qbittorrent = lib.mkForce {
     sysctl -w net.ipv4.ip_forward=1
 
     # NAT traffic from namespace subnet
-    ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${nsSubnet} -o wlp65s0 -j MASQUERADE || true
+    ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${nsSubnet} -o wlan0 -j MASQUERADE || true
 
     # Set default route inside namespace
     ip netns exec ${vpnNs} ip route add default via ${hostIP}

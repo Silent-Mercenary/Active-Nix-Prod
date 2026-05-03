@@ -16,7 +16,7 @@
     ./jellyfin.nix
     ./nix.nix
     ./networking.nix
-    ./piracy-suite.nix
+#    ./piracy-suite.nix
     ./pkgs.nix
     ./qbittorrent.nix
     ./security.nix
