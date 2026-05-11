@@ -7,30 +7,24 @@
 {
   imports = [
     # Include the results of the hardware scan.
+    ./boot.nix # ----> make sure to edit this for boot issues
     ./hardware-configuration.nix
     ./ddclient.nix
-    ./amd.nix
     ./caddy.nix
     ./docker.nix
     ./fish.nix
-    ./jellyfin.nix
+    #./jellyfin.nix
     ./nix.nix
     ./networking.nix
-#    ./piracy-suite.nix
+    #    ./piracy-suite.nix
     ./pkgs.nix
-    ./qbittorrent.nix
+    #	./qbittorrent.nix
     ./security.nix
     ./service.nix
     ./user.nix
     ./shm.nix
-    ## To do: add git init hook
+    ## To do: add git init hook ----> I probably wont, signed aiden
   ];
-
-  # Bootloader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
 
   time.timeZone = "America/Toronto";
   i18n.defaultLocale = "en_US.UTF-8";
